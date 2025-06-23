@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淋巴扩散路径预测</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">生物建模与模拟平台</div>
+            <ul class="nav-links">
+                <li><a href="/skin_model">皮肤建模</a></li>
+                <li><a href="/lymph_predict" class="active">淋巴预测</a></li>
+                <li><a href="/fluid_model">血液流动</a></li>
+            </ul>
+            <button class="btn btn-theme"><i class="ri-moon-line"></i> 切换主题</button>
+        </nav>
+    </header>
+
+    <section class="lymph-predict-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>淋巴扩散路径预测</h1>
+                <p>通过3D淋巴管网模拟淋巴扩散路径，分析感染扩散风险</p>
+            </div>
+        </div>
+        <div class="model-controls">
+            <label>扩散速率: <input type="range" id="diffusionRate" min="0.1" max="5" step="0.1" value="1"></label>
+            <label>初始浓度: <input type="range" id="initialConcentration" min="0.1" max="10" step="0.1" value="5"></label>
+            <label>时间步长: <input type="range" id="timeStep" min="1" max="100" step="1" value="50"></label>
+            <button class="btn btn-primary" id="runLymphPredict">运行预测</button>
+        </div>
+        <div class="chart-container">
+            <div id="lymph3D" style="width: 600px; height: 400px; margin: 0 auto;"></div>
+        </div>
+        <div class="result-section" id="lymphResult">
+            <div class="result-card"></div>
+        </div>
+        <div class="history-section">
+            <h2>历史记录</h2>
+            <div class="history-filter">
+                <label for="lymphFilter">筛选:</label>
+                <select id="lymphFilter">
+                    <option value="all">全部</option>
+                    <option value="low">低风险</option>
+                    <option value="high">高风险</option>
+                </select>
+            </div>
+            <ul class="history-list" id="lymphHistoryList"></ul>
+            <div class="pagination">
+                <button id="lymphPrevPage" onclick="changeLymphPage(-1)">上一页</button>
+                <span id="lymphPageInfo"></span>
+                <button id="lymphNextPage" onclick="changeLymphPage(1)">下一页</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 生物建模与模拟平台. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

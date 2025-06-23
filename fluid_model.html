@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血液流动模型设定</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">生物建模与模拟平台</div>
+            <ul class="nav-links">
+                <li><a href="/skin_model">皮肤建模</a></li>
+                <li><a href="/lymph_predict">淋巴预测</a></li>
+                <li><a href="/fluid_model" class="active">血液流动</a></li>
+            </ul>
+            <button class="btn btn-theme"><i class="ri-moon-line"></i> 切换主题</button>
+        </nav>
+    </header>
+
+    <section class="fluid-model-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>血液流动模型设定</h1>
+                <p>通过动态3D建模模拟感染区血管内部血液流动，实时反映血栓风险、缺血区域和亲水开放性</p>
+            </div>
+        </div>
+        <div class="model-controls">
+            <label>血液流速 (mm/s): <input type="range" id="bloodSpeed" min="0.1" max="5" step="0.1" value="2"></label>
+            <label>血管直径 (μm): <input type="range" id="vesselDiameter" min="5" max="50" step="1" value="20"></label>
+            <label>感染严重程度: <input type="range" id="infectionSeverity" min="0" max="10" step="0.1" value="5"></label>
+            <button class="btn btn-primary" id="runFluidModel">运行模拟</button>
+        </div>
+        <div class="chart-container">
+            <div id="vessel3D" style="width: 600px; height: 400px; margin: 0 auto;"></div>
+        </div>
+        <div class="result-section" id="fluidResult">
+            <div class="result-card"></div>
+        </div>
+        <div class="history-section">
+            <h2>历史记录</h2>
+            <div class="history-filter">
+                <label for="fluidFilter">筛选:</label>
+                <select id="fluidFilter">
+                    <option value="all">全部</option>
+                    <option value="normal">正常</option>
+                    <option value="abnormal">异常</option>
+                </select>
+            </div>
+            <ul class="history-list" id="fluidHistoryList"></ul>
+            <div class="pagination">
+                <button id="fluidPrevPage" onclick="changeFluidPage(-1)">上一页</button>
+                <span id="fluidPageInfo"></span>
+                <button id="fluidNextPage" onclick="changeFluidPage(1)">下一页</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 生物建模与模拟平台. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>血液</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.com/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">生物建模与模拟平台</div>
+            <ul class="nav-links">
+                <li><a href="/skin_model">皮肤建模</a></li>
+                <li><a href="/lymph_predict">淋巴预测</a></li>
+                <li><a href="/blood_flow" class="active">血液流动</a></li>
+            </ul>
+            <button class="btn btn-theme"><i class="ri-moon-line"></i> 切换主题</button>
+        </nav>
+    </header>
+
+    <section class="blood-flow-section">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>血液流动模型设定</h1>
+                <p>模拟感染区血液流动状态，分析血栓风险和缺血区域，辅助判断感染严重程度</p>
+            </div>
+        </div>
+        <div class="model-controls">
+            <label>血流速度 (mm/s): <input type="range" id="bloodSpeed" min="0.1" max="3" step="0.1" value="1.5"></label>
+            <label>血管阻力 (mmHg·s/mL): <input type="range" id="resistance" min="0.01" max="0.5" step="0.01" value="0.1"></label>
+            <label>感染指数 (0-100): <input type="range" id="infectionIndex" min="0" max="100" step="1" value="50"></label>
+            <button class="btn btn-primary" id="runBloodModel">运行模拟</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="bloodFlowChart"></canvas>
+        </div>
+        <div class="result-section" id="bloodResult">
+            <div class="result-card"></div>
+        </div>
+        <div class="history-section">
+            <h2>历史记录</h2>
+            <div class="history-filter">
+                <label for="bloodFilter">筛选:</label>
+                <select id="bloodFilter">
+                    <option value="all">全部</option>
+                    <option value="low">低风险</option>
+                    <option value="high">高风险</option>
+                </select>
+            </div>
+            <ul class="history-list" id="bloodHistoryList"></ul>
+            <div class="pagination">
+                <button id="bloodPrevPage" onclick="changeBloodPage(-1)">上一页</button>
+                <span id="bloodPageInfo"></span>
+                <button id="bloodNextPage" onclick="changeBloodPage(1)">下一页</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 生物建模与模拟平台. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
